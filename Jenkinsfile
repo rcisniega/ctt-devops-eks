@@ -38,9 +38,9 @@ pipeline {
                             )
                         ])
                     ])
-
-                  echo "Hello World! ${AWS_SECRET_KEY}"
-                  sh 'aws --profile default configure set aws_access_key_id ${AWS_SECRET_KEY}'
+                  sh 'aws --profile default configure set aws_access_key_id ${AWS_ACCESS_KEY}'
+                  sh 'aws --profile default configure set aws_secret_access_key ${AWS_SECRET_KEY}'
+                    
                 }
             }
         }
