@@ -68,6 +68,7 @@ pipeline {
         stage('deployingress') { 
             steps { 
                 sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ngress-nginx-controller-1.yaml'
+                su 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ingress-nginx-controller-2.yaml'
             }
         }
     }
