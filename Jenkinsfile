@@ -23,7 +23,7 @@ pipeline {
                             ),
                             string(
                                 defaultValue: '2',
-                                name: 'NUMNODOSCLUSTER#KS',
+                                name: 'NUMNODOSCLUSTEREKS',
                                 trim: true
                             ),
                             string(
@@ -46,7 +46,7 @@ pipeline {
         }
         stage('createeks') { 
             steps { 
-                sh 'echo test'
+                sh 'echo ${NUMNODOSCLUSTEREKS}'
             }
         }
     }
