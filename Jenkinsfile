@@ -62,7 +62,7 @@ pipeline {
         }
         stage('Download') {
             steps {
-                sh 'cat .kube/config > kubeconfig'
+                sh 'cat ~/.kube/config > kubeconfig'
             }
         }
     }
