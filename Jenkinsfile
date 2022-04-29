@@ -32,8 +32,18 @@ pipeline {
                                 trim: true
                             ),
                             string(
+                                defaultValue: 'nodes',
+                                name: 'NODESGROUPNAME',
+                                trim: true
+                            ),
+                            string(
                                 defaultValue: 't3.medium',
                                 name: 'SIZEMACHINE',
+                                trim: true
+                            ),
+                            string(
+                                defaultValue: '1.22',
+                                name: 'K8SVERSION',
                                 trim: true
                             )
                         ])
@@ -47,7 +57,13 @@ pipeline {
         stage('createeks') { 
             steps { 
                 sh 'echo ${NUMNODOSCLUSTEREKS}'
+                sh 'eksctl create cluster --name ${NAMECLUSTER} --version ${K8SVERSION} --region ${REGION} --nodegroup-name ${NODESGROUPNAME} --node-type ${SIZEMACHINE} --nodes ${NUMNODOSCLUSTEREKS}'
             }
+        }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: '.kube/config', fingerprint: true
         }
     }
 }
