@@ -60,10 +60,15 @@ pipeline {
                 sh 'eksctl create cluster --name ${NAMECLUSTER} --version ${K8SVERSION} --region ${REGION} --nodegroup-name ${NODESGROUPNAME} --node-type ${SIZEMACHINE} --nodes ${NUMNODOSCLUSTEREKS}'
             }
         }
+        stage('Download') {
+            steps {
+                sh 'cat .kube/config > kubeconfig'
+            }
+        }
     }
     post {
         always {
-            archiveArtifacts artifacts: '.kube/config', fingerprint: true
+            archiveArtifacts artifacts: 'kubeconfig', onlyIfSuccessful: true
         }
     }
 }
