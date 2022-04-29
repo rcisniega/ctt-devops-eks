@@ -1,0 +1,51 @@
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jenkins
+  labels:
+    app.kubernetes.io/name: jenkins
+    app.kubernetes.io/instance: jenkins 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  labels:
+    version: v1
+  namespace: jenkins
+spec:
+  selector:
+    matchLabels:
+      app: jenkins
+      version: v1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jenkins
+        version: v1
+    spec:
+      containers:
+      - name: jenkins
+        image: docker.io/jenkins/jenkins
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+  labels:
+    version: v1
+  namespace: jenkins
+spec:
+  type: ClusterIP
+  ports:
+  - name: web
+    port: 80
+    targetPort: 8080
+  - name: jni
+    port: 50000
+    targetPort: 50000
+  selector:
+    app: jenkins
+    version: v1
