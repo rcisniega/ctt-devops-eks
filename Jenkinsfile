@@ -67,8 +67,7 @@ pipeline {
         }
         stage('deployingress') { 
             steps { 
-                sh 'helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx'
-                sh 'helm install ingress-nginx ingress-nginx/ingress-nginx'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ngress-nginx-controller-1.yaml'
             }
         }
     }
