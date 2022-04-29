@@ -35,7 +35,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: controller
   name: ingress-nginx-controller
-  namespace: ingress-nginx-internal
+  namespace: ingress-nginx-nexus
 data:
 ---
 # Source: ingress-nginx/templates/clusterrole.yaml
@@ -139,7 +139,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: controller
   name: ingress-nginx
-  namespace: ingress-nginx-internal
+  namespace: ingress-nginx-nexus
 rules:
   - apiGroups:
       - ''
@@ -225,7 +225,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: controller
   name: ingress-nginx
-  namespace: ingress-nginx-internal
+  namespace: ingress-nginx-nexus
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -250,7 +250,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: controller
   name: ingress-nginx-controller
-  namespace: ingress-nginx-internal
+  namespace: ingress-nginx-nexus
 spec:
   type: LoadBalancer
   externalTrafficPolicy: Local
@@ -280,7 +280,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/component: controller
   name: ingress-nginx-controller
-  namespace: ingress-nginx-internal
+  namespace: ingress-nginx-nexus
 spec:
   selector:
     matchLabels:
