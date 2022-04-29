@@ -65,6 +65,12 @@ pipeline {
                 sh 'cat ~/.kube/config > kubeconfig'
             }
         }
+        stage('deployingress') { 
+            steps { 
+                sh 'helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx'
+                sh 'helm install ingress-nginx ingress-nginx/ingress-nginx'
+            }
+        }
     }
     post {
         always {
