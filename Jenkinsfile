@@ -44,5 +44,10 @@ pipeline {
                 }
             }
         }
+        stage('createeks') { 
+            steps { 
+                sh 'echo test'
+            }
+        }
     }
 }
