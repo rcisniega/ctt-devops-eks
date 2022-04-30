@@ -65,10 +65,15 @@ pipeline {
                 sh 'cat ~/.kube/config > kubeconfig'
             }
         }
-        stage('deployingress') { 
+        stage('deploy-ingress-nginx') { 
             steps { 
-                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ngress-nginx-controller-1.yaml'
-                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ingress-nginx-controller-2.yaml'
+                sh 'helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx'
+                sh 'helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx'
+            }
+        }
+        stage('deployjenkins') { 
+            steps { 
+                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/jenkins.yaml'
             }
         }
     }
