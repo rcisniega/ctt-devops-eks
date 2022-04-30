@@ -69,6 +69,8 @@ pipeline {
             steps { 
                 sh 'helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx'
                 sh 'helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx'
+                sh 'kubectl create namespace ingress-nginx-nexus'
+                sh 'helm install ingress2 ingress-nginx/ingress-nginx --namespace ingress-nginx-nexus --set controller.ingressClassResource.name=inexus'
             }
         }
         stage('deployjenkins') { 
