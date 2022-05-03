@@ -85,6 +85,11 @@ pipeline {
                 sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/nexus-repository.yaml'
             }
         }
+        stage('deploygitlab') { 
+            steps { 
+                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/gitlab.yaml'
+            }
+        }
         stage('configureingress') { 
             steps { 
                 sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/services-ingress.yaml'
