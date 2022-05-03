@@ -1,0 +1,48 @@
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jenkins
+  labels:
+    app.kubernetes.io/name: jenkins
+    app.kubernetes.io/instance: jenkins 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gitlab
+  labels:
+    version: v1
+  namespace: jenkins
+spec:
+  selector:
+    matchLabels:
+      app: gitlab
+      version: v1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gitlab
+        version: v1
+    spec:
+      containers:
+      - name: gitlab
+        image: docker.io/gitlab/gitlab-ce
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitlab
+  labels:
+    version: v1
+  namespace: jenkins
+spec:
+  type: ClusterIP
+  ports:
+  - name: web
+    port: 80
+    targetPort: 80
+  selector:
+    app: gitlab
+    version: v1
