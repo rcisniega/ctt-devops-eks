@@ -56,7 +56,6 @@ pipeline {
         }
         stage('createeks') { 
             steps { 
-                sh 'echo ${NUMNODOSCLUSTEREKS}'
                 sh 'eksctl create cluster --name ${NAMECLUSTER} --version ${K8SVERSION} --region ${REGION} --nodegroup-name ${NODESGROUPNAME} --node-type ${SIZEMACHINE} --nodes ${NUMNODOSCLUSTEREKS}'
             }
         }
@@ -89,7 +88,6 @@ pipeline {
         stage('configureingress') { 
             steps { 
                 sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/services-ingress.yaml'
-                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ingress-nginx-controller-2.yaml'
             }
         }
     }
