@@ -86,6 +86,12 @@ pipeline {
                 sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/nexus-repository.yaml'
             }
         }
+        stage('configureingress') { 
+            steps { 
+                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/services-ingress.yaml'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ingress-nginx-controller-2.yaml'
+            }
+        }
     }
     post {
         always {
