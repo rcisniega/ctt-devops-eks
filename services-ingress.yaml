@@ -24,7 +24,7 @@ metadata:
   name: nexus
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    kubernetes.io/ingress.class: inexus
+    kubernetes.io/ingress.class: nexus
   namespace: jenkins
 spec:
   rules:
