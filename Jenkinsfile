@@ -77,22 +77,22 @@ pipeline {
         }
         stage('deployjenkins') { 
             steps { 
-                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/jenkins.yaml'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/jenkins.yaml'
             }
         }
         stage('deploynexus') { 
             steps { 
-                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/nexus-repository.yaml'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/nexus-repository.yaml'
             }
         }
         stage('deploygitlab') { 
             steps { 
-                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/gitlab.yaml'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/gitlab.yaml'
             }
         }
         stage('configureingress') { 
             steps { 
-                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/services-ingress.yaml'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/services-ingress.yaml'
             }
         }
     }
