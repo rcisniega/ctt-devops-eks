@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'slave1' }
+    agent { label 'slave11' }
     stages {
         stage('configaws') {
             steps {
@@ -7,12 +7,12 @@ pipeline {
                     properties([
                         parameters([
                             string(
-                                defaultValue: 'XYZXYZXYZXYZXYZXYZ',
+                                defaultValue: 'AKIASTOKDBWTO5QRHI6D',
                                 name: 'AWS_ACCESS_KEY',
                                 trim: true
                             ),
                             string(
-                                defaultValue: 'ABCABCABCABCABC',
+                                defaultValue: 'NBxkf3Y/hIQLngVpAO90TpFeK9SgwCw0l8MMHjpA',
                                 name: 'AWS_SECRET_KEY',
                                 trim: true
                             ),
