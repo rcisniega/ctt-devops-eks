@@ -92,7 +92,7 @@ pipeline {
         }
         stage('configureingress') { 
             steps { 
-                sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/services-ingress.yaml'
+               // sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/services-ingress.yaml'
             }
         }
     }
