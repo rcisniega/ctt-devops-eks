@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'slave1' }
+    agent { label 'slave11' }
     stages {
         stage('configaws') {
             steps {
