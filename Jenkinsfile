@@ -77,26 +77,26 @@ pipeline {
         }
         stage('deployjenkins') { 
             steps { 
-                sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/jenkins.yaml'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/jenkins.yaml'
             }
         }
         stage('deploynexus') { 
             steps { 
-                sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/nexus-repository.yaml'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/nexus-repository.yaml'
             }
         }
         stage('deploygitlab') { 
             steps { 
-                sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/gitlab.yaml'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/gitlab.yaml'
             }
         }
         stage('configureingress') { 
             steps {
                 sh 'sleep 10'
                 sh 'echo stage configureingress'
-                sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/ingresses-jenkins.yaml'
-                sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/ingresses-nexus.yaml'
-                sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/ingresses-gitlab.yaml'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ingresses-jenkins.yaml'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ingresses-nexus.yaml'
+                sh 'kubectl apply -f https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ingresses-gitlab.yaml'
                 sh 'wget https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ingress-nginx-nexus-patch.yaml && kubectl patch deployment/ingress2-ingress-nginx-controller -n ingress-nginx-nexus --patch-file ingress-nginx-nexus-patch.yaml'
                 sh 'wget https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ingress-nginx-gitlab-patch.yaml && kubectl patch deployment/ingress3-ingress-nginx-controller -n ingress-nginx-gitlab --patch-file ingress-nginx-gitlab-patch.yaml'
             }
@@ -110,3 +110,4 @@ pipeline {
             archiveArtifacts artifacts: 'URL-Devops.txt', onlyIfSuccessful: true
         }
     }
+}
