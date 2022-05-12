@@ -92,16 +92,21 @@ pipeline {
         }
         stage('configureingress') { 
             steps {
+                sh 'sleep 10'
                 sh 'echo stage configureingress'
                 sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/ingresses-jenkins.yaml'
                 sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/ingresses-nexus.yaml'
                 sh 'kubectl apply -f https://raw.githubusercontent.com/rcisniega/ctt-devops-eks/main/ingresses-gitlab.yaml'
+                sh 'wget https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ingress-nginx-nexus-patch.yaml && kubectl patch deployment/ingress2-ingress-nginx-controller -n ingress-nginx-nexus --patch-file ingress-nginx-nexus-patch.yaml'
+                sh 'wget https://raw.githubusercontent.com/arrsvjes/ctt-devops-eks/main/ingress-nginx-gitlab-patch.yaml && kubectl patch deployment/ingress3-ingress-nginx-controller -n ingress-nginx-gitlab --patch-file ingress-nginx-gitlab-patch.yaml'
             }
         }
     }
     post {
         always {
+            sh 'sleep 30 && echo "Pausa de 30 seg, esperando se complete rollout"'
             archiveArtifacts artifacts: 'kubeconfig', onlyIfSuccessful: true
+            sh 'kubectl get ingress -n jenkins > URL-Devops.txt'
+            archiveArtifacts artifacts: 'URL-Devops.txt', onlyIfSuccessful: true
         }
     }
-}
